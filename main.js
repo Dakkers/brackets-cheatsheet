@@ -12,7 +12,6 @@ define(function (require, exports, module) {
         extDir         = EU.getModulePath(module) + "prefs/";
 
     var csDomain  = new NodeDomain("cheatsheetdomain", EU.getModulePath(module, "node/cheatSheetDomain")),
-        openFiles = [],
         prefs;
 
     function currentFileChangeListener(e, newFile, newPanel, oldFile, oldPanel) {
@@ -24,16 +23,24 @@ define(function (require, exports, module) {
             // don't re-open a cheatsheet
             if (newFileExt !== oldFileExt) {
 
-                // don't try to open a cheatsheet for an extension we haven't set
-                if (prefs[newFileExt] !== undefined) {
-                    CommandManager.execute(Commands.FILE_OPEN, {
-                        fullPath:  extDir + prefs[newFileExt],
-                        silent: true,
-                        paneId: 'second-pane'
-                    });
+                // don't open cheatsheets for temporary views (not in working set)
+                if (MVM.getWorkingSet('first-pane').indexOf(newFile) !== -1) {
 
-                    MVM.setActivePaneId('first-pane');
-                    MVM.focusActivePane();
+                    // don't try to open a cheatsheet for an extension we haven't set
+                    if (prefs[newFileExt] !== undefined) {
+
+                        // only execute if both panes are open
+                        if (MVM.getPaneCount() === 2) {
+                            CommandManager.execute(Commands.FILE_OPEN, {
+                                fullPath:  extDir + prefs[newFileExt],
+                                silent: true,
+                                paneId: 'second-pane'
+                            });
+
+                            MVM.setActivePaneId('first-pane');
+                            MVM.focusActivePane();
+                        }
+                    }
                 }
             }
         }
@@ -42,7 +49,6 @@ define(function (require, exports, module) {
     csDomain.exec('readJSONFile', extDir + 'preferences.json')
             .done(function(obj) {
                 prefs = obj;
-
                 $(MVM).on("currentFileChange", currentFileChangeListener);
             });
 
