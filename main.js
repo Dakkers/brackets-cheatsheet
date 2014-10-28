@@ -9,7 +9,7 @@ define(function (require, exports, module) {
         MVM            = brackets.getModule("view/MainViewManager"),
         EU             = brackets.getModule("utils/ExtensionUtils"),
         NodeDomain     = brackets.getModule("utils/NodeDomain"),
-        extDir         = EU.getModulePath(module) + "prefs/";
+        extDir         = EU.getModulePath(module, "prefs/");
 
     var csDomain  = new NodeDomain("cheatsheetdomain", EU.getModulePath(module, "node/cheatSheetDomain")),
         prefs;
@@ -30,6 +30,7 @@ define(function (require, exports, module) {
                     if (prefs[newFileExt] !== undefined) {
 
                         // only execute if both panes are open
+                        // WE NEED TO GO DEEPER
                         if (MVM.getPaneCount() === 2) {
                             CommandManager.execute(Commands.FILE_OPEN, {
                                 fullPath:  extDir + prefs[newFileExt],
