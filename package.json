@@ -1,0 +1,13 @@
+﻿{
+    "name": "brackets-cheatsheet",
+    "title": "Brackets Cheat Sheets",
+    "description": "Use cheat sheets to remember the things you need.",
+    "homepage": "https://github.com/stdako/brackets-cheatsheet",
+    "version": "1.0.0",
+    "author": "Dakota St. Laurent <d.h.stlaurent@gmail.com> (http://stdako.com)",
+    "license": "MIT",
+    "engines": {
+        "brackets": ">=0.24.0"
+    },
+    "i18n": [ "en" ]
+}
