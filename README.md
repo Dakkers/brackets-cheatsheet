@@ -1,7 +1,8 @@
 # Brackets Cheat Sheet
 Keeps a user-defined cheat sheet in the second pane. You can define a cheat sheet for any kind of file (e.g. .py, .sass) - just keep it defined in the ```prefs/preferences.json``` and make sure that the cheat sheet file is also in the ```prefs/``` folder.
 
-The path for these files must be inside the extension's directory, usually ```~/.config/Brackets/extensions/user/cheat-sheet/```.
+The path for these files must be inside the extension's directory,
+from the menu click `Help -> Show Extentions folder`, navigate to `user/brackets-cheatsheet/prefs`.
 
 ## running it
 - two panes must be open
@@ -21,7 +22,7 @@ If you reopen Brackets and the files are all in the same working set (usually th
 }
 ```
 
-The directory structure would be as follows (again, the path should be ```~/.config/Brackets/extensions/user/cheat-sheet/```):
+The directory structure would be as follows (again, click `Help -> Show Extentions folder`, navigate to `user/brackets-cheatsheet/`):
 ```
 + node
 |--- cheatSheetDomain.js
